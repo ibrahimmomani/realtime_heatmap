@@ -1,0 +1,64 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>Realtime Tweets Tracking</title>
+  <!-- Bootstrap -->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <!-- Google Maps -->
+  <link href="https://google-developers.appspot.com/maps/documentation/javascript/examples/default.css" rel="stylesheet" type="text/css" />
+  <script type="text/javascript" src="https://maps.googleapis.com/maps/api/js?sensor=false&libraries=visualization"></script>
+  <!-- Main Style -->
+  <link rel="stylesheet" type="text/css" href="stylesheets/style.css">
+</head>
+
+<body onload="initialize()">
+  <nav class="navbar navbar-fixed-top" role="navigation">
+    <a class="navbar-brand" href="#">Realtime Twitter GeoTracking by Location</a>
+      <form class="navbar-form navbar-left" role="search">
+        <div class="checkbox navbar-btn">
+          <label class="navbar-link" for="worldSearch">
+            <input type="checkbox" class="autosubmit" id="worldSearch" value="true">
+            Start Mapping
+          </label>
+        </div>
+      </form>
+  </nav>
+
+  <div class="container">
+    <div id="map_canvas"></div>
+  </div>
+
+  <!-- Scripting -->
+    <script src="https://code.jquery.com/jquery-2.1.4.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+    <script src="/socket.io/socket.io.js"></script>
+    <script src="/js/client.js"></script>
+    <script>
+
+      var socket = io.connect();
+      //var isWorldChecked = $('#worldSearch')[0].checked;
+
+    $('#worldSearch').click(function() {
+      var socket = io.connect();
+      var worldSearchChecked = this.checked;
+      socket.emit('worldSearchChecked', worldSearchChecked);
+    });
+
+    function changeSearchLocation() {
+      initialize();
+      var locationsValue = $("#locationsValue").val();
+      var search = locationsValue;
+      //$('#currentlySerching').html('Currently Searching: ' + locationsValue);   
+      socket.emit('worldSearchChecked', false);
+      socket.emit('locationSearchTerm', { search: search });
+    }
+
+    socket.on('currentlySearching', function (data) {
+       // $('#currentlySerching').html('Currently Searching: ' + data);
+      });
+
+    </script>
+</body>
+</html>

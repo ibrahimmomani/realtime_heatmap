@@ -1,0 +1,45 @@
+body {
+  -moz-box-sizing: border-box; -webkit-box-sizing: border-box; box-sizing: border-box;
+  font-family: arial;
+  padding-top: 50px;
+  background-color: #E5E3DF;
+}
+
+a{
+  color: black;
+}
+
+a:hover{
+  color: black;
+}
+
+p {
+    height: 50px;
+    padding: 15px 15px;
+    font-size: 18px;
+    line-height: 20px;
+}
+
+
+.navbar {
+  .navbar-inner {
+    background-color: #E5E3DF;
+    background-image: none;
+  }
+}
+
+
+.container {
+      width: 100%;
+      height: 100%;
+}
+
+#map_canvas{
+  height:100%;
+}
+
+@media (min-width: 768px)
+.navbar {
+    border-radius: 0;
+    background: #E5E3DF;
+}
